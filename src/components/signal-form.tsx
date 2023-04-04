@@ -1,25 +1,48 @@
+import {useState} from "react";
+
+interface ISignalData {
+    asset: string,
+    orderType: string,
+    entryPrice: string,
+    takeProfit: string,
+    stopLoss: string,
+    closed: boolean,
+    successful: boolean
+}
+
 export default function SignalForm() {
+    const [signalData, setSignalData] = useState<ISignalData>({
+        asset: "",
+        orderType: "",
+        entryPrice: "",
+        takeProfit: "",
+        stopLoss: "",
+        closed: false,
+        successful: false,
+    })
+
     return (
         <div className={"flex flex-col content-center"}>
-            <form action="" className={"flex flex-col content-center"}>
-                <div id={"asset"} className={"p-2 flex flex-row justify-between"}>
-                    <input type="text" className={"rounded-lg"} placeholder={"Asset"}/>
-                </div>
-                <div id={"entry"} className={"p-2 flex flex-row justify-between"}>
-                    <input type="text" className={"rounded-lg"} placeholder={"Entry Price"}/>
-                </div>
-                <div id={"tp"} className={"p-2 flex flex-row justify-between"}>
-                    <input type="text" className={"rounded-lg"} placeholder={"Profit Price"}/>
-                </div>
-                <div id={"loss"} className={"p-2 flex flex-row justify-between"}>
-                    <input type="text" className={"rounded-lg"} placeholder={"Loss Price"}/>
-                </div>
+            <form className={"flex flex-col content-center"}>
+                <InputField placeholder={"Asset Name"}></InputField>
+                <InputField placeholder={"Order Type"}></InputField>
+                <InputField placeholder={"Entry Price"}></InputField>
+                <InputField placeholder={"Profit Price"}></InputField>
+                <InputField placeholder={"Loss Price"}></InputField>
                 <div className="flex justify-center p-2 rounded-lg bg-indigo-500 text-blue-50">
                     <button type={"submit"}>
                         Push
                     </button>
                 </div>
             </form>
+        </div>
+    )
+}
+
+function InputField(props: {placeholder: string}) {
+    return (
+        <div id={props.placeholder} className={"p-2 flex flex-row justify-between"}>
+            <input type="text" className={"rounded-lg"} placeholder={props.placeholder}/>
         </div>
     )
 }
